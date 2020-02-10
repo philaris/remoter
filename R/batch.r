@@ -78,6 +78,8 @@ batch <- function(addr="localhost", port=55555, password=NULL, file, script,
   
   test_connection(addr, port)
   
+  message('INFO: after test of connection')
+  
   reset_state()
   
   set(whoami, "local")
@@ -89,6 +91,8 @@ batch <- function(addr="localhost", port=55555, password=NULL, file, script,
   
   set(isbatch, TRUE)
   
+  
+  message('INFO: calling remoter_repl_batch')
   remoter_repl_batch(src=src)
   
   invisible(TRUE)
@@ -98,6 +102,7 @@ batch <- function(addr="localhost", port=55555, password=NULL, file, script,
 
 remoter_repl_batch <- function(src, env=globalenv())
 {
+  message('INFO: remoter_repl_batch entry')
   test <- remoter_init_client()
   if (!test) return(FALSE)
   
@@ -106,7 +111,8 @@ remoter_repl_batch <- function(src, env=globalenv())
   
   len <- length(src)
   line <- 1L
-  
+
+  message('INFO: start of while loop')
   while (TRUE)
   {
     input <- character(0)

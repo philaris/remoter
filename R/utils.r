@@ -1,10 +1,11 @@
 test_connection <- function(addr, port, ntries=10, sleeptime=1)
 {
+  message('INFO: test_connection entry')
   ctx <- pbdZMQ::init.context()
   socket <- pbdZMQ::init.socket(ctx, "ZMQ_REQ")
   addr <- pbdZMQ::address(addr, port)
   
-  
+  message('INFO: test_connection starting tries')
   for (i in ntries)
   {
     test <- tryCatch(
@@ -17,6 +18,9 @@ test_connection <- function(addr, port, ntries=10, sleeptime=1)
     else
       break
   }
+  message('INFO: test_connection after tries')
+  print(test)
+  print(dput(test))
   
   rm(socket)
   rm(ctx)

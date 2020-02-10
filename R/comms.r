@@ -84,8 +84,12 @@ remoter_receive <- function()
 
 first_send <- function()
 {
+  message('INFO: first_send entry')
   send_unsecure(magicmsg_first_connection)
+  message('INFO: receive after first')
   security <- receive_unsecure()
+  message('INFO: got security reply')
+  print(dput(security))
   
   if (security && !has.sodium())
     stop("remoter server communications are encrypted but the 'sodium' package is not detected on the client.  Please install the 'sodium' package, or start an unsecure server.")
